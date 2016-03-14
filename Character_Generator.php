@@ -1,10 +1,17 @@
 <?php
 
+// I feel that the solution to the problem of assigning level or progression to the goals of a character could be implemented by actually introducing the levels in the goals
+//In other words, it would be a good idea to actually add the record of the level in the goals array.
+//This would also come with the fact that there must be categories to which a goal belongs or if not, just a certain level to which the goal would belong
+//In this code example I would implement the goal with levels and statuses which would keep track of the goal level and whether it is accomplished or not.
 
 class Character_Generator {
+
+    //Initiation of Id, character variable
     public $id = 0;
     public static $character;
 
+    //function for getting default values for the various variables used further for implementation of the characters
     public function getDefaults() {
         $time = time();
         $id = $this->id;
@@ -16,6 +23,10 @@ class Character_Generator {
         );
     }
 
+    //I am assuming here that the purpose of the if statement is in context to the remaining code which might be present in the system
+    //Because if that is not the case, initializing the class if the character's empty won't make any sense, as the character variable
+    //will still be empty. However, I am assuming that this class in the actual code would also contain another function which fetches characters
+    //on initializing the class, in which case the if statement makes perfect sense and is an example of excellent code.
     public static function stock() {
         if (empty(static::$character)) {
             new self;
@@ -23,6 +34,8 @@ class Character_Generator {
         return static::$character;
     }
 
+
+    //constructor for initializing the character variable
     public function __construct() {
 
         static::$character = array(
@@ -49,7 +62,10 @@ class Character_Generator {
                                 'cash' => 0,
                                 'accumulated_comfort' => 52*45,
                                 'accumulated_responsibility' => 52*55
-                            )
+                            ),
+                            'level' => 1,
+                            'status' => 'Not Accmomplished' //The reason that I kept this meta as string is that there could be more than two possibilities whether the goal is accomplished, pending or something more.
+                                                            //This could be also be done using an ENUM
                         ),
                         1 => array(
                             'name' => 'Donald\'s Goal 2',
@@ -57,7 +73,9 @@ class Character_Generator {
                                 'cash' => 1000,
                                 'accumulated_comfort' => 52*15,
                                 'accumulated_responsibility' => 52*45
-                            )
+                            ),
+                            'level' => 1,
+                            'status' => 'Not Accmomplished'
                         ),
                     ),
                     'flags' => array(
@@ -90,14 +108,18 @@ class Character_Generator {
                             'name' => 'Lola\'s Goal 1',
                             'markers' => array(
                                 'flags' => array('no_tuition_debt')
-                            )
+                            ),
+                            'level' => 1,
+                            'status' => 'Not Accmomplished'
                         ),
                         1 => array(
                             'name' => 'Lola\'s Goal 2',
                             'markers' => array(
                                 'accumulated_comfort' => 52*40,
                                 'accumulated_responsibility' => 52*15
-                            )
+                            ),
+                            'level' => 1,
+                            'status' => 'Not Accmomplished'
                         ),
                     ),
                     'flags' => array(
